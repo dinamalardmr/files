@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Book Submission</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    #form-wrapper {
+      height: 100vh;
+      overflow-y: auto;
+      padding: 16px;
+      box-sizing: border-box;
+      padding-bottom: 400px; /* allows room when keyboard opens */
+      font-family: sans-serif;
+    }
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="form-wrapper">
+    <label>Email *</label>
+    <input type="email" id="email" required />
+
+    <label>Book Name *</label>
+    <input type="text" id="book-name" required />
+
+    <label>Author Name *</label>
+    <input type="text" id="author-name" required />
+
+    <label>Publisher Name *</label>
+    <input type="text" id="publisher-name" required />
+
+    <label>ISBN Number</label>
+    <input type="text" id="isbn" />
+
+    <label>Price</label>
+    <input type="number" id="price" />
+
+    <label>Description in English</label>
+    <textarea id="desc-en" rows="4"></textarea>
+
+    <label>Description in Tamil</label>
+    <textarea id="desc-ta" rows="4"></textarea>
+
+    <label>Book Wrapper Image (Upload only .jpg image and File size below 1MB)*</label>
+    <input type="file" id="image-upload" accept=".jpg" required />
+  </div>
+
+  <script>
+    const wrapper = document.getElementById('form-wrapper');
+    const focusableElements = wrapper.querySelectorAll('input, textarea');
+
+    focusableElements.forEach((el) => {
+      el.addEventListener('focus', () => {
+        setTimeout(() => {
+          const rect = el.getBoundingClientRect();
+          wrapper.scrollTo({
+            top: wrapper.scrollTop + rect.top - 100,
+            behavior: 'smooth'
+          });
+        }, 400); // delay to wait for keyboard animation
+      });
+    });
+  </script>
+</body>
+</html>
